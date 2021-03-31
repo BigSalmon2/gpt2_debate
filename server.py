@@ -24,7 +24,7 @@ tokenizer = AutoTokenizer.from_pretrained("zanderbush/DebateWriting")
 model = AutoModelWithLMHead.from_pretrained("zanderbush/DebateWriting", return_dict=True)
 
 # change cpu to gpu so that model can use gpu (because default type is cpu)
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cpu')
 model.to(device)
 
 # request queue setting
