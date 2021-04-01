@@ -20,8 +20,8 @@ app = Flask(__name__)
 # limit input file size under 2MB
 
 # model loading
-tokenizer = AutoTokenizer.from_pretrained("zanderbush/DebateWriting")
-model = AutoModelWithLMHead.from_pretrained("zanderbush/DebateWriting", return_dict=True)
+tokenizer = AutoTokenizer.from_pretrained("ktrapeznikov/gpt2-medium-topic-news-v2")
+model = AutoModelWithLMHead.from_pretrained("ktrapeznikov/gpt2-medium-topic-news-v2", return_dict=True)
 
 # change cpu to gpu so that model can use gpu (because default type is cpu)
 device = torch.device('cpu')
