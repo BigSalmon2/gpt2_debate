@@ -147,6 +147,9 @@ def generation(types):
             if types == 'long':
                 length = int(str(request.form['length']))
                 args.append(length)
+            if types == 'long':
+                words = int(str(request.form['words']))
+                args.append(words)
             
         except Exception:
             return jsonify({'message' : 'Error! Can not read args from request'}), 500
