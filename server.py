@@ -120,7 +120,7 @@ def run_long(prompt, num, length):
                                         min_length=length,
                                         top_k=40,
                                         num_return_sequences=num,
-                                        bad_words_ids = bad_words_ids)
+                                        bad_words_ids = bad_word_ids)
 
         generated_texts = {}
         for i, sample_output in enumerate(sample_outputs):
