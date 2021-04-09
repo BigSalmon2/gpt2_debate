@@ -97,7 +97,7 @@ def run_long(prompt, num, length, words):
     try:
         prompt = prompt.strip()
         input_ids = tokenizer.encode(prompt, return_tensors='pt')
-        bad_words_ids = tokenizer.encode(words)
+        bad_word_ids = [tokenizer.encode(words) for words in words]
         # input_ids also need to apply gpu device!
         input_ids = input_ids.to(device)
 
@@ -109,8 +109,8 @@ def run_long(prompt, num, length, words):
                                         max_length=length, 
                                         min_length=length,
                                         top_k=40,
-                                        num_return_sequences=num
-                                        bad_word_ids=bad_word_ids)
+                                        num_return_sequences=num,
+                                        bad_words_ids = bad_word_ids)
 
         generated_texts = {}
         for i, sample_output in enumerate(sample_outputs):
