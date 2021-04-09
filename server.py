@@ -147,8 +147,7 @@ def generation(types):
             if types == 'long':
                 length = int(str(request.form['length']))
                 args.append(length)
-            if types == 'long':
-                words = (str(request.form['words']))
+                words = str(request.form['words'])
                 args.append(words)
             
         except Exception:
