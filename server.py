@@ -19,9 +19,9 @@ app = Flask(__name__)
 
 # limit input file size under 2MB
 
-# model loading  
+# model loading
 tokenizer = AutoTokenizer.from_pretrained("laxya007/gpt2_business")
-model = AutoModelWithLMHead.from_pretrained("laxya007/gpt2_business")
+model = AutoModelWithLMHead.from_pretrained("laxya007/gpt2_business", return_dict=True)
 
 # change cpu to gpu so that model can use gpu (because default type is cpu)
 device = torch.device('cpu')
@@ -93,11 +93,21 @@ def run_short(prompt, num):
         return 500
 
 # run long model
-def run_long(prompt, num, length, words):
+def run_long(prompt, num, length):
     try:
+        
+        bad_word_ids = [
+            [10134],
+            [318], 
+            [1716], 
+            [373], 
+            [655],
+            [198],
+        ]
+        
         prompt = prompt.strip()
         input_ids = tokenizer.encode(prompt, return_tensors='pt')
-        bad_word_ids = [tokenizer.encode(words) for words in words]
+        
         # input_ids also need to apply gpu device!
         input_ids = input_ids.to(device)
 
@@ -110,7 +120,7 @@ def run_long(prompt, num, length, words):
                                         min_length=length,
                                         top_k=40,
                                         num_return_sequences=num,
-                                        bad_words_ids = bad_word_ids)
+                                        bad_words_ids = bad_words_ids)
 
         generated_texts = {}
         for i, sample_output in enumerate(sample_outputs):
@@ -147,8 +157,6 @@ def generation(types):
             if types == 'long':
                 length = int(str(request.form['length']))
                 args.append(length)
-                words = str(request.form['words'])
-                args.append(words)
             
         except Exception:
             return jsonify({'message' : 'Error! Can not read args from request'}), 500
