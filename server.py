@@ -19,9 +19,9 @@ app = Flask(__name__)
 
 # limit input file size under 2MB
 
-# model loading
-tokenizer = AutoTokenizer.from_pretrained("ktrapeznikov/gpt2-medium-topic-news-v2")
-model = AutoModelWithLMHead.from_pretrained("ktrapeznikov/gpt2-medium-topic-news-v2", return_dict=True)
+# model loading  
+tokenizer = AutoTokenizer.from_pretrained("laxya007/gpt2_business")
+model = AutoModelWithLMHead.from_pretrained("laxya007/gpt2_business")
 
 # change cpu to gpu so that model can use gpu (because default type is cpu)
 device = torch.device('cpu')
@@ -109,7 +109,8 @@ def run_long(prompt, num, length):
                                         max_length=length, 
                                         min_length=length,
                                         top_k=40,
-                                        num_return_sequences=num)
+                                        num_return_sequences=num
+                                        bad_word_ids=bad_word_ids)
 
         generated_texts = {}
         for i, sample_output in enumerate(sample_outputs):
