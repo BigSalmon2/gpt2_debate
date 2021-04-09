@@ -93,11 +93,11 @@ def run_short(prompt, num):
         return 500
 
 # run long model
-def run_long(prompt, num, length):
+def run_long(prompt, num, length, words):
     try:
         prompt = prompt.strip()
         input_ids = tokenizer.encode(prompt, return_tensors='pt')
-        
+        bad_words_ids = tokenizer.encode(words)
         # input_ids also need to apply gpu device!
         input_ids = input_ids.to(device)
 
