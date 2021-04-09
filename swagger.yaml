@@ -65,6 +65,8 @@ paths:
                   type: string
                 length:
                   type: string
+                words:
+                  type: string
       responses:
         '200':
           description: success
