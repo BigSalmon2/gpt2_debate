@@ -121,6 +121,12 @@ def run_long(prompt, num, length):
             [12465],
             [2048],
             [617],
+            [423],
+            [7448],
+            [389],
+            [550],
+            [1595],
+            [470],
         ]
         
         prompt = prompt.strip()
